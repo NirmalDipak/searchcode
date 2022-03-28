@@ -1,0 +1,32 @@
+export class SearchComponent  {
+  rows :any;
+  temp:any;
+
+  constructor() {
+
+  }
+  updateFilter(event: any) {
+    const val = event.target.value.toLowerCase();
+    var found: boolean;
+    const temp = this.temp.filter(function (d: any) {
+      console.log(d)
+       Object.keys(d).filter(function (objectKey) {
+         console.log(d[objectKey])
+         if (d[objectKey]) {
+           if (d[objectKey].toLowerCase().indexOf(val) !== -1) {
+             found = true;
+           }
+         }
+       })
+       if (found) {
+        found = false;
+         return d;
+       } else {
+         return false;
+       }
+     });
+
+     this.rows = temp;
+   }
+
+}
