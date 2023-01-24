@@ -5,28 +5,44 @@ export class SearchComponent  {
   constructor() {
 
   }
-  updateFilter(event: any) {
-    const val = event.target.value.toLowerCase();
-    var found: boolean;
-    const temp = this.temp.filter(function (d: any) {
-      console.log(d)
-       Object.keys(d).filter(function (objectKey) {
-         console.log(d[objectKey])
-         if (d[objectKey]) {
-           if (d[objectKey].toLowerCase().indexOf(val) !== -1) {
-             found = true;
-           }
-         }
-       })
-       if (found) {
-        found = false;
-         return d;
-       } else {
-         return false;
-       }
-     });
+    /**********
+  * Description:-
+  * Search value in Array
+  * Param:
+  * 1.searchArray:Array need To be search
+  * 2.searchValue:search value String
+  * 3.objectArray:Field need to be search in searchArray array
+  * Return Array as output
+  ************/
 
-     this.rows = temp;
-   }
+  searchArray(searchArray: any, searchValue: string, objectArray: any) {
+    var found: boolean;
+    const temp = searchArray.filter(function (d: any) {
+      objectArray.filter(function (objectKey: string) {
+        if (d[objectKey]) {
+          if (!isNaN(d[objectKey])) {
+            if (d[objectKey].toString().indexOf(searchValue) !== -1) {
+              found = true;
+            }
+          } else {
+            if (d[objectKey].toLowerCase().indexOf(searchValue.toLowerCase()) !== -1) {
+              found = true;
+            }
+          }
+
+        }
+      })
+      if (found) {
+        found = false;
+        return d;
+      } else {
+        return false;
+      }
+    });
+
+    return temp;
+  }
+
+  /******* End SearchArray Function ***********/
 
 }
